@@ -1,15 +1,16 @@
 # charger_status
 
-A new Flutter plugin project.
+## Flutter Background Tasks Showcase
+This project is a Flutter plugin which intent to showcase flutter background tasks using a callbackDispatcher as described in [this 
+article](https://medium.com/p/26815e1c4046)
 
-## Getting Started
+The plugin will run in background and provide BootComplete and Battery and charger status events to 
+the callbackDispatcher function in the example app main.dart. 
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+In addition, the callbackDispatcher will register to location changes once it called from native.
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+Currently it works only on Android. 
+
+
 

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -11,13 +10,13 @@ import 'package:charger_status/charger_status.dart';
 import 'package:geolocator/geolocator.dart';
 
 @pragma('vm:entry-point')
-void appHeadlessDispatcher() async {
-  print("appHeadlessDispatcher called");
+void callbackDispatcher() async {
+  print("callbacksDispatcher called");
   WidgetsFlutterBinding.ensureInitialized();
   DartPluginRegistrant.ensureInitialized();
 
   ChargerStatus.instance.listenToEvents().listen((event) {
-    print("PowerStatusEvent: ${event}");
+    print("onNewEvent: $event");
   });
 
   ChargerStatus.instance.startPowerChangesListener();
@@ -39,7 +38,7 @@ Future<bool> _listenToGeoLocations() async {
           //when going to the background
           foregroundNotificationConfig: const ForegroundNotificationConfig(
             notificationText:
-            "Getting you location in background, don't worry",
+            "Getting you location in background",
             notificationTitle: "Running in Background",
             enableWakeLock: false,
           )
@@ -60,7 +59,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _listenToGeoLocations();
   //_listenToBackgroundLocation();
-  ChargerStatus.instance.registerHeadlessDispatcher(appHeadlessDispatcher);
+  ChargerStatus.instance.registerHeadlessDispatcher(callbackDispatcher);
   runApp(const MyApp());
 }
 
